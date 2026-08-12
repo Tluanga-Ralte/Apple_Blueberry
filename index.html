@@ -37,6 +37,7 @@
             cursor: pointer;
             position: absolute;
             transition: all 0.1s ease;
+            touch-action: manipulation;
         }
         #yesBtn {
             background-color: #4CAF50;
@@ -65,8 +66,8 @@
         function saidYes() {
             alert("Woohoo! Best day ever! ❤️ Let's celebrate!");
             
-            // This is the direct application link that forces iPhones to launch WhatsApp instantly
-            window.location.href = "whatsapp://send?phone=919160526517&text=YES!%20I%20will%20marry%20you!%20%E2%9D%A4%EF%B8%8F";
+            // Fixed Universal Link format for smooth iPhone redirect
+            window.location.assign("https://wa.me");
         }
 
         function moveNoButton() {
