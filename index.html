@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="format-detection" content="telephone=no">
 
-    <title>I thluak kan test ang! ❤️</title>
+    <title>From: Blueberry 🩵️</title>
 
     <style>
         * {
@@ -13,22 +13,40 @@
             -webkit-tap-highlight-color: transparent;
         }
 
+        html,
         body {
             margin: 0;
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
             min-height: 100dvh;
             overflow: hidden;
 
-            font-family: -apple-system, BlinkMacSystemFont,
-                         "Segoe UI", Arial, sans-serif;
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Arial,
+                sans-serif;
 
             display: flex;
             justify-content: center;
             align-items: center;
 
+            padding:
+                env(safe-area-inset-top)
+                env(safe-area-inset-right)
+                env(safe-area-inset-bottom)
+                env(safe-area-inset-left);
+
             background:
-                radial-gradient(circle at top left,
-                    rgba(255,255,255,0.9),
-                    transparent 35%),
+                radial-gradient(
+                    circle at top left,
+                    rgba(255, 255, 255, 0.95),
+                    transparent 38%
+                ),
                 linear-gradient(
                     135deg,
                     #ffe4ec,
@@ -37,20 +55,31 @@
                 );
         }
 
-        /* Floating hearts */
+        /* =========================
+           FLOATING HEARTS
+        ========================== */
+
         .heart {
             position: fixed;
             bottom: -50px;
+
             pointer-events: none;
             user-select: none;
-            opacity: 0.35;
+
+            opacity: 0;
 
             animation: floatUp linear forwards;
+
+            z-index: 1;
         }
 
         @keyframes floatUp {
-            from {
-                transform: translateY(0) rotate(0deg);
+            0% {
+                transform:
+                    translateY(0)
+                    rotate(0deg)
+                    scale(0.8);
+
                 opacity: 0;
             }
 
@@ -58,40 +87,72 @@
                 opacity: 0.45;
             }
 
-            to {
-                transform: translateY(-115vh) rotate(360deg);
+            100% {
+                transform:
+                    translateY(-115dvh)
+                    rotate(360deg)
+                    scale(1.2);
+
                 opacity: 0;
             }
         }
 
+
+        /* =========================
+           MAIN CARD
+        ========================== */
+
         .card {
             position: relative;
+
             width: min(90%, 430px);
-            padding: 42px 25px 38px;
+
+            padding:
+                42px
+                24px
+                38px;
 
             text-align: center;
 
-            background: rgba(255,255,255,0.78);
+            background:
+                rgba(255, 255, 255, 0.78);
+
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
 
-            border: 1px solid rgba(255,255,255,0.65);
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.7);
+
             border-radius: 32px;
 
             box-shadow:
-                0 25px 60px rgba(150, 20, 60, 0.20),
-                inset 0 1px 0 rgba(255,255,255,0.8);
+                0 25px 60px
+                rgba(150, 20, 60, 0.2),
+                inset 0 1px 0
+                rgba(255, 255, 255, 0.9);
+
+            z-index: 5;
         }
 
+
+        /* =========================
+           TOP EMOJI
+        ========================== */
+
         .emoji {
-            font-size: 55px;
+            font-size: 56px;
             margin-bottom: 10px;
 
-            animation: heartbeat 1.8s infinite;
+            animation:
+                heartbeat
+                1.8s
+                infinite;
         }
 
         @keyframes heartbeat {
-            0%, 100% {
+            0%,
+            100% {
                 transform: scale(1);
             }
 
@@ -112,54 +173,93 @@
             }
         }
 
-        h1 {
-            color: #b51f4d;
-            font-size: clamp(25px, 7vw, 34px);
-            line-height: 1.25;
 
-            margin: 0 0 10px;
+        /* =========================
+           TEXT
+        ========================== */
+
+        h1 {
+            margin:
+                0
+                0
+                10px;
+
+            color: #b51f4d;
+
+            font-size:
+                clamp(
+                    25px,
+                    7vw,
+                    34px
+                );
+
+            line-height: 1.25;
         }
 
         .subtitle {
-            margin: 0 0 32px;
+            margin:
+                0
+                0
+                32px;
 
             color: #77505d;
+
             font-size: 15px;
+            line-height: 1.5;
         }
+
+
+        /* =========================
+           BUTTON AREA
+        ========================== */
 
         .buttons {
             position: relative;
 
             width: 100%;
-            height: 95px;
+            min-height: 90px;
 
             display: flex;
+
             justify-content: center;
-            gap: 18px;
+            align-items: flex-start;
+
+            gap: 14px;
         }
 
         button {
             border: none;
             outline: none;
 
+            min-width: 120px;
             height: 56px;
-            min-width: 125px;
 
-            padding: 0 25px;
+            padding:
+                0
+                22px;
+
+            border-radius: 100px;
 
             font-size: 18px;
             font-weight: 700;
 
-            border-radius: 100px;
-
             cursor: pointer;
+
             touch-action: manipulation;
+
+            user-select: none;
+            -webkit-user-select: none;
 
             transition:
                 transform 0.18s ease,
                 box-shadow 0.18s ease,
-                background 0.18s ease;
+                filter 0.18s ease;
         }
+
+
+        /* =========================
+           YES BUTTON
+        ========================== */
 
         #yesBtn {
             position: relative;
@@ -167,57 +267,95 @@
             color: white;
 
             background:
-                linear-gradient(135deg, #27ae60, #41d17d);
+                linear-gradient(
+                    135deg,
+                    #27ae60,
+                    #41d17d
+                );
 
             box-shadow:
-                0 9px 25px rgba(39, 174, 96, 0.30);
+                0 9px 25px
+                rgba(39, 174, 96, 0.3);
 
-            z-index: 5;
+            z-index: 20;
         }
 
         #yesBtn:hover {
-            transform: scale(1.08);
-            box-shadow:
-                0 12px 30px rgba(39, 174, 96, 0.40);
+            filter: brightness(1.05);
         }
 
         #yesBtn:active {
             transform: scale(0.96);
         }
 
-        #noBtn {
+
+        /* =========================
+           MAIHTEI BUTTON
+        ========================== */
+
+        #maihteiBtn {
             position: relative;
 
             color: white;
 
             background:
-                linear-gradient(135deg, #f44336, #ff6a64);
+                linear-gradient(
+                    135deg,
+                    #f44336,
+                    #ff6a64
+                );
 
             box-shadow:
-                0 9px 25px rgba(244, 67, 54, 0.25);
+                0 9px 25px
+                rgba(244, 67, 54, 0.25);
 
-            z-index: 10;
+            z-index: 30;
         }
 
-        /*
-        Once the button starts escaping,
-        JavaScript changes this to fixed.
-        */
-        #noBtn.running {
+        #maihteiBtn.running {
             position: fixed;
+
             margin: 0;
+
+            z-index: 50;
+
+            transition:
+                left 0.16s ease,
+                top 0.16s ease,
+                transform 0.15s ease;
         }
 
-        /* Success screen */
+
+        /* =========================
+           SUCCESS SCREEN
+        ========================== */
+
         #success {
             position: fixed;
             inset: 0;
 
             display: none;
+
             justify-content: center;
             align-items: center;
 
-            padding: 25px;
+            padding:
+                max(
+                    25px,
+                    env(safe-area-inset-top)
+                )
+                max(
+                    20px,
+                    env(safe-area-inset-right)
+                )
+                max(
+                    25px,
+                    env(safe-area-inset-bottom)
+                )
+                max(
+                    20px,
+                    env(safe-area-inset-left)
+                );
 
             background:
                 linear-gradient(
@@ -230,36 +368,68 @@
         }
 
         .success-card {
-            width: min(90%, 430px);
+            width:
+                min(
+                    90%,
+                    430px
+                );
 
-            padding: 45px 25px;
+            padding:
+                45px
+                25px;
 
             text-align: center;
 
             border-radius: 30px;
 
-            background: rgba(255,255,255,0.9);
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.92
+                );
 
             box-shadow:
-                0 25px 60px rgba(120, 20, 60, 0.25);
+                0 25px 60px
+                rgba(
+                    120,
+                    20,
+                    60,
+                    0.25
+                );
 
-            animation: popIn 0.45s ease;
+            animation:
+                popIn
+                0.45s
+                ease;
         }
 
         @keyframes popIn {
             from {
                 opacity: 0;
-                transform: scale(0.7);
+
+                transform:
+                    scale(0.7);
             }
 
             to {
                 opacity: 1;
-                transform: scale(1);
+
+                transform:
+                    scale(1);
             }
         }
 
+        .success-emoji {
+            font-size: 66px;
+        }
+
         .success-card h2 {
-            margin: 8px 0 10px;
+            margin:
+                8px
+                0
+                10px;
 
             color: #c2185b;
 
@@ -267,18 +437,24 @@
         }
 
         .success-card p {
+            margin-bottom: 20px;
+
             color: #704453;
-            line-height: 1.5;
+
+            line-height: 1.6;
         }
 
         .whatsapp-btn {
             display: inline-flex;
 
-            margin-top: 15px;
-            padding: 15px 25px;
-
             align-items: center;
             justify-content: center;
+
+            margin-top: 8px;
+
+            padding:
+                15px
+                25px;
 
             color: white;
 
@@ -286,45 +462,123 @@
 
             text-decoration: none;
 
-            font-weight: 700;
             font-size: 17px;
+            font-weight: 700;
 
             border-radius: 100px;
 
             box-shadow:
-                0 8px 22px rgba(37, 211, 102, 0.3);
+                0 8px 22px
+                rgba(
+                    37,
+                    211,
+                    102,
+                    0.3
+                );
+
+            transition:
+                transform
+                0.18s
+                ease;
         }
 
-        @media (max-width: 400px) {
+        .whatsapp-btn:active {
+            transform:
+                scale(0.96);
+        }
+
+
+        /* =========================
+           PHONE OPTIMIZATION
+        ========================== */
+
+        @media (max-width: 480px) {
+
             .card {
-                padding-left: 18px;
-                padding-right: 18px;
+                width: 89%;
+
+                padding:
+                    35px
+                    18px
+                    30px;
+
+                border-radius: 28px;
             }
 
-            button {
-                min-width: 115px;
-                padding: 0 20px;
-                font-size: 17px;
+            .emoji {
+                font-size: 51px;
+            }
+
+            h1 {
+                font-size:
+                    clamp(
+                        24px,
+                        7.5vw,
+                        30px
+                    );
+            }
+
+            .subtitle {
+                margin-bottom: 27px;
+
+                font-size: 14px;
             }
 
             .buttons {
                 gap: 10px;
+            }
+
+            button {
+                min-width: 110px;
+
+                height: 54px;
+
+                padding:
+                    0
+                    18px;
+
+                font-size: 16px;
+            }
+        }
+
+
+        @media (max-width: 350px) {
+
+            button {
+                min-width: 100px;
+
+                padding:
+                    0
+                    14px;
+
+                font-size: 15px;
+            }
+
+            .buttons {
+                gap: 7px;
             }
         }
 
     </style>
 </head>
 
+
 <body>
+
+    <!-- MAIN CARD -->
 
     <main class="card">
 
-        <div class="emoji">💍❤️</div>
+        <div class="emoji">
+            💍🩷
+        </div>
 
-        <h1>Min nei duh tawh em?</h1>
+        <h1>
+            Min nei duh tawh em?
+        </h1>
 
         <p class="subtitle">
-            Think carefully before you choose... 👀💕
+            I thluak kha hmang la aw... 👀💕
         </p>
 
         <div class="buttons">
@@ -336,9 +590,9 @@
             </button>
 
             <button
-                id="noBtn"
+                id="maihteiBtn"
                 type="button">
-                Aih 😢
+                Ka hrelole 😢
             </button>
 
         </div>
@@ -346,28 +600,34 @@
     </main>
 
 
-    <!-- Success Screen -->
+
+    <!-- SUCCESS SCREEN -->
+
     <section id="success">
 
         <div class="success-card">
 
-            <div style="font-size:65px;">
+            <div class="success-emoji">
                 🥰💖💍
             </div>
 
-            <h2>Ehemmmm!</h2>
+            <h2>
+                Ka Hmangaih Che 😘💖
+            </h2>
 
             <p>
-                Ka Hmangaih Che 😘💖<br>
-                I knew you would say yes! 😌
+                💖
+                <br><br>
+                notee.... 😌❤️
             </p>
 
             <a
                 id="whatsappLink"
                 class="whatsapp-btn"
                 href="#"
-                target="_blank">
-                Message me on WhatsApp 💚
+                target="_blank"
+                rel="noopener">
+                Min lo vid call nghal rawh...🥰
             </a>
 
         </div>
@@ -375,45 +635,83 @@
     </section>
 
 
+
     <script>
 
-        const yesBtn = document.getElementById("yesBtn");
-        const noBtn = document.getElementById("noBtn");
-        const success = document.getElementById("success");
+        /* =========================
+           ELEMENTS
+        ========================== */
+
+        const yesBtn =
+            document.getElementById(
+                "yesBtn"
+            );
+
+        const maihteiBtn =
+            document.getElementById(
+                "maihteiBtn"
+            );
+
+        const success =
+            document.getElementById(
+                "success"
+            );
+
         const whatsappLink =
-            document.getElementById("whatsappLink");
+            document.getElementById(
+                "whatsappLink"
+            );
 
 
-        /* -----------------------------------
-           WhatsApp settings
-        ----------------------------------- */
+        /* =========================
+           WHATSAPP SETTINGS
+        ========================== */
 
-        // Put the phone number here with
-        // COUNTRY CODE and NO "+".
-        //
-        // Example:
-        // 919876543210
+        /*
+            Put the phone number below.
+
+            INCLUDE country code.
+
+            DO NOT use:
+            +
+            spaces
+            hyphens
+
+            Example:
+            919876543210
+        */
 
         const phoneNumber = "919160526517";
 
-        const message =
-            "Ehemmmm 😘❤️ Aw ka ti! 💍💕";
+
+        const whatsappMessage =
+            "Ehemmmm 😘 Aw ka ti! 💍💕";
 
 
-        /* -----------------------------------
-           YES button
-        ----------------------------------- */
+        /* =========================
+           YES BUTTON
+        ========================== */
 
-        yesBtn.addEventListener("click", saidYes);
+        yesBtn.addEventListener(
+            "click",
+            saidYes
+        );
+
 
         function saidYes() {
 
-            success.style.display = "flex";
+            success.style.display =
+                "flex";
+
 
             createHeartExplosion();
 
+
             const encodedMessage =
-                encodeURIComponent(message);
+                encodeURIComponent(
+                    whatsappMessage
+                );
+
 
             if (phoneNumber) {
 
@@ -422,173 +720,537 @@
 
             } else {
 
-                // Opens WhatsApp without
-                // specifying a recipient.
-
                 whatsappLink.href =
                     `https://wa.me/?text=${encodedMessage}`;
+
             }
+
         }
 
 
-        /* -----------------------------------
-           NO button escape system
-        ----------------------------------- */
+        /* =========================
+           MAIHTEI ESCAPE SYSTEM
+        ========================== */
 
         let escapeCount = 0;
 
-        function moveNoButton(event) {
+
+        function moveMaihteiButton(event) {
 
             if (event) {
+
                 event.preventDefault();
+
             }
+
 
             escapeCount++;
 
-            noBtn.classList.add("running");
 
-
-            const padding = 15;
-
-            const maxX =
-                window.innerWidth -
-                noBtn.offsetWidth -
-                padding;
-
-            const maxY =
-                window.innerHeight -
-                noBtn.offsetHeight -
-                padding;
-
-
-            let x =
-                Math.random() *
-                (maxX - padding) +
-                padding;
-
-            let y =
-                Math.random() *
-                (maxY - padding) +
-                padding;
+            maihteiBtn.classList.add(
+                "running"
+            );
 
 
             /*
-             Avoid putting the NO button
-             directly on top of the YES button.
+                visualViewport is much better
+                for phones because Safari and
+                Chrome resize the visible area
+                when their navigation bars move.
+            */
+
+            const viewport =
+                window.visualViewport;
+
+
+            const viewportWidth =
+                viewport
+                    ? viewport.width
+                    : window.innerWidth;
+
+
+            const viewportHeight =
+                viewport
+                    ? viewport.height
+                    : window.innerHeight;
+
+
+            /*
+                Keep the button well inside
+                the visible phone screen.
+            */
+
+            const paddingLeft = 22;
+
+            const paddingRight = 22;
+
+            const paddingTop = 55;
+
+            const paddingBottom = 100;
+
+
+            const buttonWidth =
+                maihteiBtn.offsetWidth;
+
+
+            const buttonHeight =
+                maihteiBtn.offsetHeight;
+
+
+            const minX =
+                paddingLeft;
+
+
+            const maxX =
+                Math.max(
+                    minX,
+                    viewportWidth -
+                    buttonWidth -
+                    paddingRight
+                );
+
+
+            const minY =
+                paddingTop;
+
+
+            const maxY =
+                Math.max(
+                    minY,
+                    viewportHeight -
+                    buttonHeight -
+                    paddingBottom
+                );
+
+
+            let x =
+                minX +
+                Math.random() *
+                (maxX - minX);
+
+
+            let y =
+                minY +
+                Math.random() *
+                (maxY - minY);
+
+
+            /*
+                Avoid covering the YES button.
             */
 
             const yesRect =
                 yesBtn.getBoundingClientRect();
 
-            const safeDistance = 100;
 
-            if (
-                Math.abs(
-                    x - yesRect.left
-                ) < safeDistance &&
+            const buttonCenterX =
+                x +
+                buttonWidth / 2;
 
-                Math.abs(
-                    y - yesRect.top
-                ) < safeDistance
-            ) {
 
-                x =
-                    x < window.innerWidth / 2
-                    ? maxX
-                    : padding;
+            const buttonCenterY =
+                y +
+                buttonHeight / 2;
+
+
+            const yesCenterX =
+                yesRect.left +
+                yesRect.width / 2;
+
+
+            const yesCenterY =
+                yesRect.top +
+                yesRect.height / 2;
+
+
+            const distanceFromYes =
+                Math.hypot(
+                    buttonCenterX -
+                    yesCenterX,
+
+                    buttonCenterY -
+                    yesCenterY
+                );
+
+
+            /*
+                If too close to YES,
+                try again.
+            */
+
+            if (distanceFromYes < 145) {
+
+                if (
+                    yesCenterX <
+                    viewportWidth / 2
+                ) {
+
+                    x = maxX;
+
+                } else {
+
+                    x = minX;
+
+                }
+
+
+                if (
+                    yesCenterY <
+                    viewportHeight / 2
+                ) {
+
+                    y =
+                        Math.max(
+                            minY,
+                            viewportHeight *
+                            0.65
+                        );
+
+                } else {
+
+                    y =
+                        Math.min(
+                            maxY,
+                            viewportHeight *
+                            0.20
+                        );
+
+                }
+
             }
 
 
-            noBtn.style.left = `${x}px`;
-            noBtn.style.top = `${y}px`;
-
-
             /*
-             YES gets slightly bigger each
-             time they try to say no 😏
+                Final safety clamp.
+                This makes sure it NEVER
+                leaves the visible area.
             */
 
-            const scale =
-                Math.min(
-                    1 + escapeCount * 0.06,
-                    1.45
+            x =
+                Math.max(
+                    minX,
+                    Math.min(
+                        x,
+                        maxX
+                    )
                 );
 
+
+            y =
+                Math.max(
+                    minY,
+                    Math.min(
+                        y,
+                        maxY
+                    )
+                );
+
+
+            maihteiBtn.style.left =
+                `${x}px`;
+
+
+            maihteiBtn.style.top =
+                `${y}px`;
+
+
+            /* =========================
+               MAKE YES GROW
+            ========================== */
+
+            const yesScale =
+                Math.min(
+                    1 +
+                    escapeCount *
+                    0.045,
+
+                    1.35
+                );
+
+
             yesBtn.style.transform =
-                `scale(${scale})`;
+                `scale(${yesScale})`;
 
 
-            /*
-             Change NO text after several
-             failed attempts.
-            */
+            /* =========================
+               CHANGE MAIHTEI MESSAGE
+            ========================== */
 
             const messages = [
-                "Aih 😢",
-                "Are you sure? 🥺",
-                "Think again 😭",
-                "Really?? 😳",
-                "No chance 😌",
-                "Just say Aw! 😂",
-                "You can't escape ❤️"
+
+                "Maihtei 😢",
+
+                "I chiang chiah maw? 🥺",
+
+                "In ngaihtuah tha la😭",
+
+                "Thluak hmang leh ta? 😳",
+
+                "Huizzzz 👀",
+
+                "Aw ti mai la! 😂",
+
+                "Thluak hmang lo in le..🩷"
+
             ];
 
-            const index =
+
+            const messageIndex =
                 Math.min(
                     escapeCount,
                     messages.length - 1
                 );
 
-            noBtn.textContent =
-                messages[index];
+
+            maihteiBtn.textContent =
+                messages[
+                    messageIndex
+                ];
+
         }
 
 
-        /*
-         Desktop
-        */
+//         =========================
+//            PHONE BEHAVIOR
+//         ========================== */
+// 
+//         
+//             PHONE/TABLET:
+//             It runs away only when
+//             the user actually touches it.
+//         */
+// 
+//         maihteiBtn.addEventListener(
+//             "click",
+//             function(event) {
+// 
+//                 if (
+//                     event.pointerType !==
+//                     "mouse"
+//                 ) {
+// 
+//                     moveMaihteiButton(
+//                         event
+//                     );
+// 
+//                 }
+// 
+//             }
+//         );
+// 
+// 
+//         =========================
+//            DESKTOP BEHAVIOR
+//         ========================== */
+// 
+//         
+//             COMPUTER:
+//             Runs away when the mouse
+//             reaches it.
+//         */
+// 
+//         maihteiBtn.addEventListener(
+//             "pointerenter",
+//             function(event) {
+// 
+//                 if (
+//                     event.pointerType ===
+//                     "mouse"
+//                 ) {
+// 
+//                     moveMaihteiButton(
+//                         event
+//                     );
+// 
+//                 }
+// 
+//             }
+//         );
 
-        noBtn.addEventListener(
-            "mouseenter",
-            moveNoButton
+/* =========================
+   MAIHTEI CLICK BEHAVIOR
+========================== */
+
+maihteiBtn.addEventListener(
+    "click",
+    function(event) {
+
+        event.preventDefault();
+
+        moveMaihteiButton(event);
+
+    }
+);
+
+
+        /* =========================
+           KEEP BUTTON SAFE IF
+           PHONE ROTATES / RESIZES
+        ========================== */
+
+        window.addEventListener(
+            "resize",
+            function() {
+
+                if (
+                    maihteiBtn.classList
+                        .contains(
+                            "running"
+                        )
+                ) {
+
+                    repositionInsideScreen();
+
+                }
+
+            }
         );
 
 
-        /*
-         Mobile / touchscreen
-        */
+        if (window.visualViewport) {
 
-        noBtn.addEventListener(
-            "touchstart",
-            moveNoButton,
-            { passive: false }
-        );
+            window.visualViewport
+                .addEventListener(
+                    "resize",
+                    function() {
+
+                        if (
+                            maihteiBtn
+                                .classList
+                                .contains(
+                                    "running"
+                                )
+                        ) {
+
+                            repositionInsideScreen();
+
+                        }
+
+                    }
+                );
+
+        }
 
 
-        /*
-         If they somehow manage to click it,
-         it still escapes.
-        */
+        function repositionInsideScreen() {
 
-        noBtn.addEventListener(
-            "click",
-            moveNoButton
-        );
+            const viewport =
+                window.visualViewport;
 
 
-        /* -----------------------------------
-           Floating hearts
-        ----------------------------------- */
+            const width =
+                viewport
+                    ? viewport.width
+                    : window.innerWidth;
+
+
+            const height =
+                viewport
+                    ? viewport.height
+                    : window.innerHeight;
+
+
+            const paddingX = 22;
+
+            const paddingTop = 55;
+
+            const paddingBottom = 100;
+
+
+            const buttonWidth =
+                maihteiBtn.offsetWidth;
+
+
+            const buttonHeight =
+                maihteiBtn.offsetHeight;
+
+
+            let currentX =
+                parseFloat(
+                    maihteiBtn.style.left
+                ) || paddingX;
+
+
+            let currentY =
+                parseFloat(
+                    maihteiBtn.style.top
+                ) || paddingTop;
+
+
+            const maxX =
+                Math.max(
+                    paddingX,
+                    width -
+                    buttonWidth -
+                    paddingX
+                );
+
+
+            const maxY =
+                Math.max(
+                    paddingTop,
+                    height -
+                    buttonHeight -
+                    paddingBottom
+                );
+
+
+            currentX =
+                Math.max(
+                    paddingX,
+                    Math.min(
+                        currentX,
+                        maxX
+                    )
+                );
+
+
+            currentY =
+                Math.max(
+                    paddingTop,
+                    Math.min(
+                        currentY,
+                        maxY
+                    )
+                );
+
+
+            maihteiBtn.style.left =
+                `${currentX}px`;
+
+
+            maihteiBtn.style.top =
+                `${currentY}px`;
+
+        }
+
+
+        /* =========================
+           FLOATING HEARTS
+        ========================== */
 
         function createHeart() {
 
             const heart =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
 
-            heart.className = "heart";
 
-            const hearts =
-                ["❤️", "💕", "💖", "💗", "💘"];
+            heart.className =
+                "heart";
+
+
+            const hearts = [
+
+                "❤️",
+                "💕",
+                "💖",
+                "💗",
+                "💘"
+
+            ];
+
 
             heart.textContent =
                 hearts[
@@ -600,48 +1262,71 @@
 
 
             heart.style.left =
-                Math.random() * 100 + "vw";
+                Math.random() *
+                100 +
+                "vw";
+
 
             heart.style.fontSize =
-                15 +
-                Math.random() * 25 +
+                14 +
+                Math.random() *
+                24 +
                 "px";
+
 
             heart.style.animationDuration =
                 5 +
-                Math.random() * 5 +
+                Math.random() *
+                5 +
                 "s";
 
 
-            document.body.appendChild(heart);
+            document.body.appendChild(
+                heart
+            );
 
 
             setTimeout(
-                () => heart.remove(),
+                function() {
+
+                    heart.remove();
+
+                },
                 10000
             );
+
         }
 
 
-        setInterval(createHeart, 650);
+        setInterval(
+            createHeart,
+            700
+        );
 
 
-        /* -----------------------------------
-           Heart explosion after YES
-        ----------------------------------- */
+        /* =========================
+           YES HEART EXPLOSION
+        ========================== */
 
         function createHeartExplosion() {
 
-            for (let i = 0; i < 35; i++) {
+            for (
+                let i = 0;
+                i < 40;
+                i++
+            ) {
 
                 setTimeout(
                     createHeart,
-                    i * 40
+                    i * 35
                 );
+
             }
+
         }
 
     </script>
 
 </body>
 </html>
+
