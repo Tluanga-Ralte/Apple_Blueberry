@@ -4,82 +4,643 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="format-detection" content="telephone=no">
+
     <title>I thluak kan test ang! ❤️</title>
+
     <style>
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
         body {
-            background-color: #ffebee;
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
             margin: 0;
+            min-height: 100dvh;
             overflow: hidden;
+
+            font-family: -apple-system, BlinkMacSystemFont,
+                         "Segoe UI", Arial, sans-serif;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background:
+                radial-gradient(circle at top left,
+                    rgba(255,255,255,0.9),
+                    transparent 35%),
+                linear-gradient(
+                    135deg,
+                    #ffe4ec,
+                    #ffc1d2,
+                    #ff9eb7
+                );
         }
-        h1 {
-            color: #d32f2f;
+
+        /* Floating hearts */
+        .heart {
+            position: fixed;
+            bottom: -50px;
+            pointer-events: none;
+            user-select: none;
+            opacity: 0.35;
+
+            animation: floatUp linear forwards;
+        }
+
+        @keyframes floatUp {
+            from {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            15% {
+                opacity: 0.45;
+            }
+
+            to {
+                transform: translateY(-115vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .card {
+            position: relative;
+            width: min(90%, 430px);
+            padding: 42px 25px 38px;
+
             text-align: center;
-            font-size: 24px;
-            padding: 20px;
+
+            background: rgba(255,255,255,0.78);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            border: 1px solid rgba(255,255,255,0.65);
+            border-radius: 32px;
+
+            box-shadow:
+                0 25px 60px rgba(150, 20, 60, 0.20),
+                inset 0 1px 0 rgba(255,255,255,0.8);
         }
+
+        .emoji {
+            font-size: 55px;
+            margin-bottom: 10px;
+
+            animation: heartbeat 1.8s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            15% {
+                transform: scale(1.12);
+            }
+
+            30% {
+                transform: scale(1);
+            }
+
+            45% {
+                transform: scale(1.08);
+            }
+
+            60% {
+                transform: scale(1);
+            }
+        }
+
+        h1 {
+            color: #b51f4d;
+            font-size: clamp(25px, 7vw, 34px);
+            line-height: 1.25;
+
+            margin: 0 0 10px;
+        }
+
+        .subtitle {
+            margin: 0 0 32px;
+
+            color: #77505d;
+            font-size: 15px;
+        }
+
         .buttons {
             position: relative;
+
             width: 100%;
-            height: 150px;
+            height: 95px;
+
+            display: flex;
+            justify-content: center;
+            gap: 18px;
         }
+
         button {
-            padding: 15px 30px;
-            font-size: 18px;
-            font-weight: bold;
             border: none;
-            border-radius: 25px;
+            outline: none;
+
+            height: 56px;
+            min-width: 125px;
+
+            padding: 0 25px;
+
+            font-size: 18px;
+            font-weight: 700;
+
+            border-radius: 100px;
+
             cursor: pointer;
-            position: absolute;
-            transition: all 0.1s ease;
             touch-action: manipulation;
+
+            transition:
+                transform 0.18s ease,
+                box-shadow 0.18s ease,
+                background 0.18s ease;
         }
+
         #yesBtn {
-            background-color: #4CAF50;
+            position: relative;
+
             color: white;
-            left: calc(50% - 110px);
-            top: 40px;
+
+            background:
+                linear-gradient(135deg, #27ae60, #41d17d);
+
+            box-shadow:
+                0 9px 25px rgba(39, 174, 96, 0.30);
+
+            z-index: 5;
         }
+
+        #yesBtn:hover {
+            transform: scale(1.08);
+            box-shadow:
+                0 12px 30px rgba(39, 174, 96, 0.40);
+        }
+
+        #yesBtn:active {
+            transform: scale(0.96);
+        }
+
         #noBtn {
-            background-color: #f44336;
+            position: relative;
+
             color: white;
-            left: calc(50% + 20px);
-            top: 40px;
+
+            background:
+                linear-gradient(135deg, #f44336, #ff6a64);
+
+            box-shadow:
+                0 9px 25px rgba(244, 67, 54, 0.25);
+
+            z-index: 10;
         }
+
+        /*
+        Once the button starts escaping,
+        JavaScript changes this to fixed.
+        */
+        #noBtn.running {
+            position: fixed;
+            margin: 0;
+        }
+
+        /* Success screen */
+        #success {
+            position: fixed;
+            inset: 0;
+
+            display: none;
+            justify-content: center;
+            align-items: center;
+
+            padding: 25px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffccd9,
+                    #ff8fab
+                );
+
+            z-index: 100;
+        }
+
+        .success-card {
+            width: min(90%, 430px);
+
+            padding: 45px 25px;
+
+            text-align: center;
+
+            border-radius: 30px;
+
+            background: rgba(255,255,255,0.9);
+
+            box-shadow:
+                0 25px 60px rgba(120, 20, 60, 0.25);
+
+            animation: popIn 0.45s ease;
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(0.7);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .success-card h2 {
+            margin: 8px 0 10px;
+
+            color: #c2185b;
+
+            font-size: 30px;
+        }
+
+        .success-card p {
+            color: #704453;
+            line-height: 1.5;
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
+
+            margin-top: 15px;
+            padding: 15px 25px;
+
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+
+            background: #25D366;
+
+            text-decoration: none;
+
+            font-weight: 700;
+            font-size: 17px;
+
+            border-radius: 100px;
+
+            box-shadow:
+                0 8px 22px rgba(37, 211, 102, 0.3);
+        }
+
+        @media (max-width: 400px) {
+            .card {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            button {
+                min-width: 115px;
+                padding: 0 20px;
+                font-size: 17px;
+            }
+
+            .buttons {
+                gap: 10px;
+            }
+        }
+
     </style>
 </head>
+
 <body>
 
-    <h1>Min nei duh tawh em? 💍</h1>
-    
-    <div class="buttons">
-        <button id="yesBtn" onclick="saidYes()">Aw! 😍</button>
-        <button id="noBtn" ontouchstart="moveNoButton()" onmouseover="moveNoButton()">Aih 😢</button>
-    </div>
+    <main class="card">
+
+        <div class="emoji">💍❤️</div>
+
+        <h1>Min nei duh tawh em?</h1>
+
+        <p class="subtitle">
+            Think carefully before you choose... 👀💕
+        </p>
+
+        <div class="buttons">
+
+            <button
+                id="yesBtn"
+                type="button">
+                Aw! 😍
+            </button>
+
+            <button
+                id="noBtn"
+                type="button">
+                Aih 😢
+            </button>
+
+        </div>
+
+    </main>
+
+
+    <!-- Success Screen -->
+    <section id="success">
+
+        <div class="success-card">
+
+            <div style="font-size:65px;">
+                🥰💖💍
+            </div>
+
+            <h2>Ehemmmm!</h2>
+
+            <p>
+                Ka Hmangaih Che 😘💖<br>
+                I knew you would say yes! 😌
+            </p>
+
+            <a
+                id="whatsappLink"
+                class="whatsapp-btn"
+                href="#"
+                target="_blank">
+                Message me on WhatsApp 💚
+            </a>
+
+        </div>
+
+    </section>
+
 
     <script>
+
+        const yesBtn = document.getElementById("yesBtn");
+        const noBtn = document.getElementById("noBtn");
+        const success = document.getElementById("success");
+        const whatsappLink =
+            document.getElementById("whatsappLink");
+
+
+        /* -----------------------------------
+           WhatsApp settings
+        ----------------------------------- */
+
+        // Put the phone number here with
+        // COUNTRY CODE and NO "+".
+        //
+        // Example:
+        // 919876543210
+
+        const phoneNumber = "919160526517";
+
+        const message =
+            "Ehemmmm 😘❤️ Aw ka ti! 💍💕";
+
+
+        /* -----------------------------------
+           YES button
+        ----------------------------------- */
+
+        yesBtn.addEventListener("click", saidYes);
+
         function saidYes() {
-            alert("Ehemmmm! Ka Hmangaih Che😘💖");
-            
-            // Fixed Universal Link format for smooth iPhone redirect
-            window.location.assign("https://wa.me");
+
+            success.style.display = "flex";
+
+            createHeartExplosion();
+
+            const encodedMessage =
+                encodeURIComponent(message);
+
+            if (phoneNumber) {
+
+                whatsappLink.href =
+                    `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+            } else {
+
+                // Opens WhatsApp without
+                // specifying a recipient.
+
+                whatsappLink.href =
+                    `https://wa.me/?text=${encodedMessage}`;
+            }
         }
 
-        function moveNoButton() {
-            const noBtn = document.getElementById('noBtn');
-            
-            // Randomly moves the button around the screen bounds
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-            
-            noBtn.style.left = x + 'px';
-            noBtn.style.top = y + 'px';
+
+        /* -----------------------------------
+           NO button escape system
+        ----------------------------------- */
+
+        let escapeCount = 0;
+
+        function moveNoButton(event) {
+
+            if (event) {
+                event.preventDefault();
+            }
+
+            escapeCount++;
+
+            noBtn.classList.add("running");
+
+
+            const padding = 15;
+
+            const maxX =
+                window.innerWidth -
+                noBtn.offsetWidth -
+                padding;
+
+            const maxY =
+                window.innerHeight -
+                noBtn.offsetHeight -
+                padding;
+
+
+            let x =
+                Math.random() *
+                (maxX - padding) +
+                padding;
+
+            let y =
+                Math.random() *
+                (maxY - padding) +
+                padding;
+
+
+            /*
+             Avoid putting the NO button
+             directly on top of the YES button.
+            */
+
+            const yesRect =
+                yesBtn.getBoundingClientRect();
+
+            const safeDistance = 100;
+
+            if (
+                Math.abs(
+                    x - yesRect.left
+                ) < safeDistance &&
+
+                Math.abs(
+                    y - yesRect.top
+                ) < safeDistance
+            ) {
+
+                x =
+                    x < window.innerWidth / 2
+                    ? maxX
+                    : padding;
+            }
+
+
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+
+
+            /*
+             YES gets slightly bigger each
+             time they try to say no 😏
+            */
+
+            const scale =
+                Math.min(
+                    1 + escapeCount * 0.06,
+                    1.45
+                );
+
+            yesBtn.style.transform =
+                `scale(${scale})`;
+
+
+            /*
+             Change NO text after several
+             failed attempts.
+            */
+
+            const messages = [
+                "Aih 😢",
+                "Are you sure? 🥺",
+                "Think again 😭",
+                "Really?? 😳",
+                "No chance 😌",
+                "Just say Aw! 😂",
+                "You can't escape ❤️"
+            ];
+
+            const index =
+                Math.min(
+                    escapeCount,
+                    messages.length - 1
+                );
+
+            noBtn.textContent =
+                messages[index];
         }
+
+
+        /*
+         Desktop
+        */
+
+        noBtn.addEventListener(
+            "mouseenter",
+            moveNoButton
+        );
+
+
+        /*
+         Mobile / touchscreen
+        */
+
+        noBtn.addEventListener(
+            "touchstart",
+            moveNoButton,
+            { passive: false }
+        );
+
+
+        /*
+         If they somehow manage to click it,
+         it still escapes.
+        */
+
+        noBtn.addEventListener(
+            "click",
+            moveNoButton
+        );
+
+
+        /* -----------------------------------
+           Floating hearts
+        ----------------------------------- */
+
+        function createHeart() {
+
+            const heart =
+                document.createElement("div");
+
+            heart.className = "heart";
+
+            const hearts =
+                ["❤️", "💕", "💖", "💗", "💘"];
+
+            heart.textContent =
+                hearts[
+                    Math.floor(
+                        Math.random() *
+                        hearts.length
+                    )
+                ];
+
+
+            heart.style.left =
+                Math.random() * 100 + "vw";
+
+            heart.style.fontSize =
+                15 +
+                Math.random() * 25 +
+                "px";
+
+            heart.style.animationDuration =
+                5 +
+                Math.random() * 5 +
+                "s";
+
+
+            document.body.appendChild(heart);
+
+
+            setTimeout(
+                () => heart.remove(),
+                10000
+            );
+        }
+
+
+        setInterval(createHeart, 650);
+
+
+        /* -----------------------------------
+           Heart explosion after YES
+        ----------------------------------- */
+
+        function createHeartExplosion() {
+
+            for (let i = 0; i < 35; i++) {
+
+                setTimeout(
+                    createHeart,
+                    i * 40
+                );
+            }
+        }
+
     </script>
 
 </body>
