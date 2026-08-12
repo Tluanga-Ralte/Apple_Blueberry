@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Message For You ❤️</title>
+    <style>
+        body {
+            background-color: #ffebee;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        h1 {
+            color: #d32f2f;
+            text-align: center;
+            font-size: 24px;
+            padding: 20px;
+        }
+        .buttons {
+            position: relative;
+            width: 100%;
+            height: 150px;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            position: absolute;
+            transition: all 0.1s ease;
+        }
+        #yesBtn {
+            background-color: #4CAF50;
+            color: white;
+            left: calc(50% - 110px);
+            top: 40px;
+        }
+        #noBtn {
+            background-color: #f44336;
+            color: white;
+            left: calc(50% + 20px);
+            top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Min nei duh tawh em? 💍</h1>
+    
+    <div class="buttons">
+        <button id="yesBtn" onclick="saidYes()">YES! 😍</button>
+        <button id="noBtn" ontouchstart="moveNoButton()" onmouseover="moveNoButton()">No 😢</button>
+    </div>
+
+    <script>
+        function saidYes() {
+            alert("Woohoo! Best day ever! ❤️ Let's celebrate!");
+            // This opens WhatsApp on her iPhone to text you her answer automatically
+            // Replace YOUR_PHONE_NUMBER with your actual phone number (with country code)
+            window.location.href = "https://wa.me";
+        }
+
+        function moveNoButton() {
+            const noBtn = document.getElementById('noBtn');
+            
+            // Randomly moves the button around the screen bounds
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        }
+    </script>
+
+</body>
+</html>
